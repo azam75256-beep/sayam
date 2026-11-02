@@ -1,0 +1,116 @@
+import streamlit as st
+
+# Configure the Streamlit page
+st.set_page_config(
+    page_title="FiberX - Textile Fiber Explorer",
+    page_icon="🧶",
+    layout="centered"
+)
+
+st.title("🧶 FiberX")
+st.write("A simple explorer for textile fiber facts — built for learners.")
+
+# Fiber facts database
+FIBERS = {
+    "Cotton": {
+        "classification": "Natural cellulosic fiber (Seed hair)",
+        "properties": "Soft, breathable, absorbent, biodegradable, good heat resistance",
+        "advantages": "Comfortable against skin, hypoallergenic, easy to dye, versatile",
+        "limitations": "Prone to wrinkling and shrinkage, slow to dry, susceptible to mildew",
+        "end_uses": "T-shirts, denim, bedsheets, towels, medical gauze",
+        "producing_countries": "India, China, United States, Brazil, Pakistan",
+        "fact": "Cotton fibers grow inside a protective boll and originate as single-celled seed hairs."
+    },
+    "Polyester": {
+        "classification": "Synthetic polymer fiber (Polyethylene terephthalate - PET)",
+        "properties": "High strength, lightweight, hydrophobic (quick drying), wrinkle-resistant",
+        "advantages": "Durable, shape-retaining, low cost, resistant to stretching and chemicals",
+        "limitations": "Low breathability, prone to static build-up, pilling, non-biodegradable",
+        "end_uses": "Activewear, sportswear, fleece jackets, sewing threads, upholstery",
+        "producing_countries": "China, India, Taiwan, Indonesia, United States",
+        "fact": "Polyester is the world's most widely produced fiber, often recycled from plastic drink bottles."
+    },
+    "Wool": {
+        "classification": "Natural protein fiber (Animal fleece - Sheep)",
+        "properties": "Crimped texture, natural elasticity, flame retardant, moisture-wicking, thermal insulator",
+        "advantages": "Warm in cold weather, cool in heat, wrinkle-resistant, renewable and biodegradable",
+        "limitations": "Can shrink or felt with heat and agitation, vulnerable to moth damage",
+        "end_uses": "Sweaters, suits, winter coats, thermal blankets, carpets",
+        "producing_countries": "Australia, China, New Zealand, United Kingdom, South Africa",
+        "fact": "Wool fibers have microscopic surface scales and natural crimp that trap insulating pockets of still air."
+    },
+    "Silk": {
+        "classification": "Natural protein fiber (Continuous filament - Silkworm cocoon)",
+        "properties": "Natural triangular prism luster, high tensile strength, smooth and lightweight",
+        "advantages": "Luxurious drape, soft hand feel, temperature regulating, hypoallergenic",
+        "limitations": "Delicate, weakened by perspiration and direct sunlight, requires gentle hand-wash or dry cleaning",
+        "end_uses": "Luxury evening wear, sarees, scarves, neckties, high-end bedding",
+        "producing_countries": "China, India, Uzbekistan, Vietnam, Thailand",
+        "fact": "A single silkworm cocoon can unwind into an unbroken silk filament stretching up to 900 meters long."
+    },
+    "Jute": {
+        "classification": "Natural cellulosic fiber (Bast / Stem fiber)",
+        "properties": "High tensile strength, low extensibility, coarse texture, 100% biodegradable",
+        "advantages": "Very low cost, environmentally friendly, good acoustic and thermal insulation",
+        "limitations": "Coarse surface restricts apparel use, weakens when damp, brittle when dry",
+        "end_uses": "Burlap sacks, packaging, ropes, twine, carpet backing, eco shopping bags",
+        "producing_countries": "India, Bangladesh, China, Myanmar",
+        "fact": "Jute is nicknamed the 'Golden Fiber' for its natural golden sheen and tremendous economic importance."
+    },
+    "Hemp": {
+        "classification": "Natural cellulosic fiber (Bast / Stem fiber)",
+        "properties": "Exceptionally strong, UV-protective, antimicrobial, softens over repeated washes",
+        "advantages": "Highly sustainable crop, requires little water or pesticides, durable and long-lasting",
+        "limitations": "Higher processing cost, coarse initial feel compared to cotton, limited supply chains",
+        "end_uses": "Canvas sails, durable workwear, jeans, ropes, sustainable composite materials",
+        "producing_countries": "China, France, Canada, United States",
+        "fact": "Hemp is one of the oldest textile fibers in recorded human history, cultivated for over 10,000 years."
+    },
+    "Acrylic": {
+        "classification": "Synthetic polymer fiber (Polyacrylonitrile)",
+        "properties": "Lightweight, soft, wool-like feel, warm, accepts vibrant dye colors",
+        "advantages": "Affordable wool substitute, moth-resistant, quick drying, machine washable",
+        "limitations": "Prone to static electricity and pilling, heat sensitive, sheds microplastics",
+        "end_uses": "Knitted sweaters, winter beanies, blankets, fake fur, outdoor awnings",
+        "producing_countries": "China, Turkey, India, South Korea",
+        "fact": "Acrylic fiber was originally invented to mimic the warmth and bulk of natural wool at a fraction of the cost."
+    }
+}
+
+# 1. Input: Select a fiber
+fiber = st.selectbox(
+    "Select a fiber",
+    options=list(FIBERS.keys())
+)
+
+# 2. Process & Output
+if fiber:
+    data = FIBERS[fiber]
+    
+    st.divider()
+    st.subheader(f"🧵 {fiber}")
+    st.markdown(f"**Classification:** {data['classification']}")
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("##### 🔍 Key Properties")
+        st.write(data["properties"])
+        
+        st.markdown("##### 🌟 Advantages")
+        st.write(data["advantages"])
+        
+    with col2:
+        st.markdown("##### ⚠️ Limitations")
+        st.write(data["limitations"])
+        
+        st.markdown("##### 👗 Common End Uses")
+        st.write(data["end_uses"])
+
+    st.markdown("##### 🌍 Major Producing Countries")
+    st.write(data["producing_countries"])
+    
+    st.success(f"💡 **Did you know?** {data['fact']}")
+
+st.divider()
+st.caption("FiberX • Built with Streamlit & GitHub for Textile Web App Development")
+
